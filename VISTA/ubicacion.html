@@ -1,0 +1,552 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Ubicación Taquería Chester</title>
+    <link rel="stylesheet" href="estilo-modal.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,700;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: linear-gradient(135deg, orangered, #FF2E00, #FF4500, #FF5C00, #FF7300, #FF8B00, #FFA200);
+            background-size: 500%;
+            animation: fanimado 10s infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)),
+                url(imagenes/taco_fondo.jpg);
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            position: absolute;
+            top: -70px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            margin-top: 70px;
+        }
+
+        .logo img {
+            width: 150px;
+            margin-top: 100px;
+            animation: girarLogo 3s linear forwards;
+            /* forwards hace que la animación se detenga al final */
+        }
+
+        @keyframes fanimado{
+            0%{
+                background-position: 0% 50%;
+            }
+            50%{
+                background-position: 100% 50%;
+            }
+            100%{
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes girarLogo {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .menu .navbar ul li a {
+            font-size: 25px;
+            padding: 20px;
+            color: aliceblue;
+            display: block;
+            font-weight: 600;
+            margin-top: -70px;
+        }
+
+        .menu .navbar ul li {
+            position: relative;
+            float: left;
+        }
+
+        #menu {
+            display: none;
+        }
+
+        .menu-icono {
+            width: 25px;
+        }
+
+        .menu label {
+            cursor: pointer;
+            display: none;
+        }
+
+        .header-content {
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 75px;
+            line-height: 80px;
+            color: #F9FAFC;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+        }
+
+        .header-content p {
+            font-size: 30px;
+            color: aliceblue;
+            padding: 0 250px;
+            margin-bottom: 25px;
+        }
+
+        @media(max-width:991px) {
+            .menu {
+                padding: 30px;
+            }
+
+            .menu label {
+                display: initial;
+            }
+
+            .menu .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #323337;
+                display: none;
+            }
+
+            .menu .navbar ul li {
+                width: 100%;
+            }
+
+            #menu:checked~.navbar {
+                display: initial;
+            }
+
+            .header {
+                min-height: 0vh;
+            }
+
+            .header-content {
+                padding: 100px 30px;
+            }
+
+            .header-content p {
+                padding: 0;
+            }
+
+        }
+
+        .mapa {
+            width: 100%;
+            max-width: 800px;
+            /* Puedes ajustar el valor máximo según tus preferencias */
+            height: 600px;
+        }
+
+
+        .footer {
+            padding: 5px;
+            background-color: orangered;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Estilos para el carrusel */
+        .carousel-container {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            /* Efecto de transición */
+        }
+
+        .slide {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            /* Ajusta la imagen al tamaño del contenedor */
+        }
+
+        .boton-modal {
+            margin-left: 2px;
+            margin-top: 30px;
+        }
+
+
+        /*ESTILO DE BOTON ASISTENTE*/
+        #assistantButton {
+            padding: 10px 40px;
+            font-size: 18px;
+            background-color: #008542;
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 25%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 0;
+            z-index: 1;
+            user-select: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: unset;
+            padding: .8rem 1.5rem;
+            text-decoration: none;
+            font-weight: 900;
+            transition: all 0.7s cubic-bezier(0, .8, .26, .99);
+        }
+
+        #assistantButton:before {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            content: '';
+            transition: .7s cubic-bezier(0, .8, .26, .99);
+            z-index: -1;
+            background-color: #008542;
+            box-shadow: 0 -4px rgb(21 108 0 / 50%) inset, 0 4px rgb(100 253 31 / 99%) inset, -4px 0 rgb(100 253 31 / 50%) inset, 4px 0 rgb(21 108 0 / 50%) inset;
+        }
+
+        #assistantButton:after {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            content: '';
+            box-shadow: 0 4px 0 0 rgb(0 0 0 / 15%);
+            transition: .7s cubic-bezier(0, .8, .26, .99);
+        }
+
+        #assistantButton:hover:before {
+            box-shadow: 0 -4px rgb(0 0 0 / 50%) inset, 0 4px rgb(255 255 255 / 20%) inset, -4px 0 rgb(255 255 255 / 20%) inset, 4px 0 rgb(0 0 0 / 50%) inset;
+        }
+
+        #assistantButton:hover:after {
+            box-shadow: 0 4px 0 0 rgb(0 0 0 / 15%);
+        }
+
+        #assistantButton:active {
+            transform: translateY(4px);
+        }
+
+        #assistantButton:active:after {
+            box-shadow: 0 0px 0 0 rgb(0 0 0 / 15%);
+        }
+
+
+        /* Estilos para centrar el botón horizontalmente */
+        .center-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+
+        /* Media query para pantallas más pequeñas, como dispositivos móviles */
+        @media screen and (max-width: 1100px) {
+
+            .contenedor-ima img {
+                display: none;
+            }
+
+            .container {
+                margin: 50px auto 0;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .contenedor-total {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+
+
+            .menu .logo {
+                display: block;
+                margin-left: 100px;
+                margin-top: 170px;
+            }
+
+
+            .menu .navbar {
+                display: block;
+                padding-top: 40px;
+            }
+
+            .menu .navbar ul li {
+                font-size: 20px;
+                /* Ajusta el tamaño del texto según tus preferencias */
+                padding: 20px;
+                /* Ajusta el espaciado según tus preferencias */
+            }
+
+            .header-content h1 {
+                font-size: 40px;
+                /* Ajusta el tamaño del título según tus preferencias */
+                line-height: 50px;
+                /* Ajusta la altura de línea según tus preferencias */
+                margin-bottom: 20px;
+            }
+
+            .header-content p {
+                font-size: 20px;
+                /* Ajusta el tamaño del párrafo según tus preferencias */
+                padding: 0 20px;
+            }
+
+            .container boton-modal {
+                margin-top: 20px;
+            }
+
+            .center-button {
+                margin-top: 20px;
+            }
+
+            .carousel-container {
+                max-width: 100%;
+                /* Ajusta el ancho del carrusel al 100% de su contenedor */
+            }
+
+            .carousel {
+                display: flex;
+                transition: transform 1s ease-in-out;
+                /* Efecto de transición */
+            }
+
+            .slide {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                /* Ajusta la imagen al tamaño del contenedor */
+            }
+
+            /* Estilos para el video */
+            video {
+                max-width: 100%;
+                /* Ajusta el ancho del video al 100% de su contenedor */
+                margin-bottom: 50px;
+            }
+
+            .mapaContenedor .mapa {
+                margin-top: 50px;
+                margin-bottom: 150px;
+                width: 90%;
+                padding-left: 350px;
+
+            }
+
+            .boton-modal {
+                margin-left: -900px;
+                margin-top: 350px;
+                margin-bottom: -200px;
+                display: none;
+            }
+
+            .center-button {
+                margin-top: 430px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor-total">
+
+        <header class="header">
+            <div class="menu container">
+                <a href="#" class="logo"><img src="imagenes/LOGO_TAQ_SINFONDO.png" alt=""
+                        style="width: 150px; margin-top: 100px;"></a>
+                <input type="checkbox" id="menu">
+                <label for="menu">
+                    <img src="" class="" alt="">
+                </label>
+                <nav class="navbar">
+                    <ul>
+                        <li>
+                            <a href="inicio.html">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="+productos.html">Más productos</a>
+                        </li>
+                        <li>
+                            <a href="asistente.html">Asistente de Voz</a>
+                        </li>
+
+                        <li>
+                            <a href="cliente.php">Pedido</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header-content container">
+                <h1>TAQUERIA CHESTER</h1>
+                <P>En calidad, precio, sabor, somos la mejor opción.</P>
+                <div class="center-button">
+                    <button id="assistantButton">Activar Asistente</button>
+                </div>
+            </div>
+        </header>
+        <section style="margin-top: 30px; text-align: center;">
+            <div class="contenedor-ima" style="display: flex; justify-content: space-between;">
+                <img src="imagenes/LOGO_TAQ_SINFONDO.png" alt="" style="width: 150px; height: 150px;">
+                <h1 style="margin-top: 40px; font-size: 35px; color: #F9FAFC;">¿DÓNDE NOS UBICAMOS?</h1>
+                <img src="imagenes/LOGO_TAQ_SINFONDO.png" alt="" style="width: 150px; height: 150px;">
+            </div>
+            <div class="mapaContenedor" style="margin-left: -350px; margin-top: 40px;">
+                <iframe class="mapa"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d593.6375833823358!2d-99.76005575960183!3d19.36945151430437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d279b6d19ee2d3%3A0xc3757e9432b8df5!2sTaqueria%20Chester!5e1!3m2!1ses-419!2smx!4v1695923937723!5m2!1ses-419!2smx"
+                    style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+    </div>
+
+    <div style="margin-left: 900px; margin-top: -400px;">
+        <!--Boton-->
+        <div class="boton-modal">
+            <label for="btn-modal" style="background-color: #008542; color: #F9FAFC;">
+                Abrir y Reproducir
+            </label>
+        </div>
+        <!--Fin de Boton-->
+        <!--Ventana Modal-->
+        <input type="checkbox" id="btn-modal">
+        <div class="container-modal">
+            <div class="content-modal">
+                <h2>¡UBICANOS EN!</h2>
+                <p>Si te interesa venir a probar nuestra comida y pasar un momento agradable en compañia de tu
+                    familia
+                    puedes encontrarnos en: Manzana 005, 50900 Villa de Almoloya de Juárez, México.
+                </p>
+                <div class="btn-cerrar">
+                    <label for="btn-modal">Cerrar</label>
+                </div>
+            </div>
+            <label for="btn-modal" class="cerrar-modal"></label>
+        </div>
+        <!--Fin de Ventana Modal-->
+
+        <script>
+            // Obtener el botón modal y el contenido del modal
+            const botonModal = document.querySelector('.boton-modal label');
+            const contenidoModal = document.querySelector('.content-modal p'); // Cambia esto según la estructura de tu modal
+
+            // Agregar un evento de clic al botón modal
+            botonModal.addEventListener('click', () => {
+                // Obtener el texto del contenido del modal
+                const textoModal = contenidoModal.innerText;
+
+                // Crear un objeto SpeechSynthesisUtterance con el texto del modal
+                const utterance = new SpeechSynthesisUtterance(textoModal);
+                utterance.lang = 'es-ES'; // Establece el idioma que prefieras
+
+                // Hacer que el asistente de voz hable el contenido del modal
+                window.speechSynthesis.speak(utterance);
+            });
+        </script>
+    </div>
+    </div>
+
+    </section>
+    <h2 style=" text-align: center; font-size: 35px; margin-top: 300px; color: #F9FAFC;">CONOCE NUESTRO LOCAL</h2>
+    <div class="carousel-container">
+        <div class="carousel">
+            <img class="slide" src="imagenes/local2.jpg" alt="Imagen 2">
+            <img class="slide" src="imagenes/local3.jpg" alt="Imagen 3">
+            <img class="slide" src="imagenes/local4.jpg" alt="Imagen 4">
+            <img class="slide" src="imagenes/local5.jpg" alt="Imagen 5">
+            <img class="slide" src="imagenes/local6.jpg" alt="Imagen 6">
+        </div>
+    </div>
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const carousel = document.querySelector(".carousel");
+            const slides = document.querySelectorAll(".slide");
+            let currentIndex = 0;
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+            }
+
+            function updateCarousel() {
+                const offset = -currentIndex * 100; // Ancho de cada imagen es 100%
+                carousel.style.transform = `translateX(${offset}%)`;
+            }
+
+            setInterval(nextSlide, 3000); // Cambiar automáticamente cada 3 segundos
+        });
+    </script>
+
+
+
+
+    <section style="text-align: center; align-items: center;">
+        <h2 style="font-size: 35px; color: #F9FAFC; margin-top: 60px;">¡VEN Y DISFRUTA DE UNA RICA COMIDA!</h2>
+        <video width="1080" height="720" controls>
+
+            <source src="videos/video_local.mp4" type="video/mp4">
+        </video>
+    </section>
+
+    <script src="asistente.js"></script>
+</body>
+
+</html>

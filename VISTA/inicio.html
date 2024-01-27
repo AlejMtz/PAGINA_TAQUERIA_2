@@ -1,0 +1,636 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Taquería Chester</title>
+   
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,700;1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-image: linear-gradient(135deg, orangered,#FF2E00, #FF4500, #FF5C00, #FF7300, #FF8B00, #FFA200);
+    background-size: 500%;
+    animation: fanimado 10s infinite;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 100px auto 0;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.container .card {
+    position: relative;
+    max-width: 300px;
+    height: 215px;
+    background-color: #FFF;
+    margin: 30px 10px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transition: 0.3s ease-in-out;
+}
+
+.container .card:hover {
+    height: 420px;
+}
+
+.container .card .imgBx {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    top: -60px;
+    left: 5px;
+    z-index: 1;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.container .card .imgBx img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+.container .card .content {
+    position: relative;
+    margin-top: -140px;
+    padding: 10px 15px;
+    text-align: center;
+    color: black;
+    visibility: hidden;
+    opacity: 0;
+    transition-delay: 0.3s ease-in-out;
+}
+
+.container .card:hover .content {
+    visibility: visible;
+    opacity: 1;
+    margin-top: -40px;
+    transition-delay: 0.3s;
+}
+
+.header {
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)
+    ),
+    url(../imagenes/taco_fondo.jpg);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.menu {
+    position: absolute;
+    top: -235px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-top: 100px;
+    margin-left: -60px;
+}
+
+.logo img {
+    width: 150px;
+    margin-top: 100px;
+    animation: girarLogo 3s linear forwards; /* forwards hace que la animación se detenga al final */
+}
+
+@keyframes girarLogo {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.menu .navbar ul li a {
+    font-size: 25px;
+    padding: 20px;
+    color: aliceblue;
+    display: block;
+    font-weight: 600;
+    margin-top: -70px;
+}
+
+.menu .navbar ul li {
+    position: relative;
+    float: left;
+}
+
+#menu {
+    display: none;
+}
+
+.menu label {
+    cursor: pointer;
+    display: none;
+}
+
+.header-content {
+    text-align: center;
+}
+
+.header-content h1 {
+    font-size: 55px;
+    line-height: 80px;
+    color: #F9FAFC;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+}
+
+.header-content p {
+    font-size: 30px;
+    color: aliceblue;
+    padding: 0 250px;
+    margin-bottom: 25px;
+}
+
+.taco-1 {
+    padding: 0 25px;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 140px;
+}
+
+.taco-1 img {
+    width: 200px;
+    height: auto;
+}
+
+.taco-1 .taco-info {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.taco-1:hover .taco-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.taq-1 h3 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.txt-p {
+            font-size: 16px;
+            color: white;
+            padding: 0 250px;
+            margin-bottom: 35px;
+}
+
+.taq-content {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+.taq-content h2 {
+            font-size: 55px;
+            line-height: 70px;
+            color: white;
+            text-transform: uppercase;
+            padding: 0 250px;
+            margin-bottom: 15px;
+        }
+
+        @keyframes fanimado{
+            0%{
+                background-position: 0% 50%;
+            }
+            50%{
+                background-position: 100% 50%;
+            }
+            100%{
+                background-position: 0% 50%;
+            }
+        }
+
+
+@media (max-width: 991px) {
+    .menu {
+        padding: 30px;
+    }
+
+    .menu label {
+        display: initial;
+    }
+
+    .menu .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #323337;
+        display: none;
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    #menu:checked ~ .navbar {
+        display: initial;
+    }
+
+    .header {
+        min-height: 0vh;
+    }
+
+    .header-content {
+        padding: 100px 30px;
+    }
+
+    .header-content p {
+        padding: 0;
+    }
+
+    .taco-img {
+        display: none;
+    }
+}
+
+h2 {
+        text-align: center;
+        font-size: 35px;
+    }
+
+
+
+.precios ul li {
+    font-size: 30px;
+    white-space: nowrap; /* Evita que los elementos se envuelvan al siguiente renglón */
+    margin-right: 20px; /* Añade espacio entre elementos */
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+    .footer {
+    display: flex;
+    align-items: center;
+   
+}
+
+/*ESTILO DE BOTON ASISTENTE*/
+#assistantButton {
+  padding: 10px 40px;
+  font-size: 18px;
+  background-color: #008542;
+  color: #fff;
+  text-shadow: 0 2px 0 rgb(0 0 0 / 25%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 0;
+  z-index: 1;
+  user-select: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: unset;
+  padding: .8rem 1.5rem;
+  text-decoration: none;
+  font-weight: 900;
+  transition: all 0.7s cubic-bezier(0,.8,.26,.99);
+}
+
+#assistantButton:before {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  content: '';
+  transition: .7s cubic-bezier(0,.8,.26,.99);
+  z-index: -1;
+  background-color: #008542!important;
+  box-shadow: 0 -4px rgb(21 108 0 / 50%) inset, 0 4px rgb(100 253 31 / 99%) inset, -4px 0 rgb(100 253 31 / 50%) inset, 4px 0 rgb(21 108 0 / 50%) inset;
+}
+
+#assistantButton:after {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  content: '';
+  box-shadow: 0 4px 0 0 rgb(0 0 0 / 15%);
+  transition: .7s cubic-bezier(0,.8,.26,.99);
+}
+
+#assistantButton:hover:before {
+  box-shadow: 0 -4px rgb(0 0 0 / 50%) inset, 0 4px rgb(255 255 255 / 20%) inset, -4px 0 rgb(255 255 255 / 20%) inset, 4px 0 rgb(0 0 0 / 50%) inset;
+}
+
+#assistantButton:hover:after {
+  box-shadow: 0 4px 0 0 rgb(0 0 0 / 15%);
+}
+
+#assistantButton:active {
+  transform: translateY(4px);
+}
+
+#assistantButton:active:after {
+  box-shadow: 0 0px 0 0 rgb(0 0 0 / 15%);
+}
+
+
+ /* Estilos para centrar el botón horizontalmente */
+ .center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:20px;
+}
+
+ /* Media query para pantallas más pequeñas, como dispositivos móviles */
+@media screen and (max-width: 1100px) {
+    .container {
+        margin: 50px auto 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .contenedor-total{
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    
+
+    .menu .logo {
+        display: block;
+        margin-left:100px;
+        margin-top: 400px;
+    }
+
+    
+    .menu .navbar {
+        display: block;
+        padding-top:40px;
+    }
+
+    .menu .navbar ul li {
+        font-size: 20px; /* Ajusta el tamaño del texto según tus preferencias */
+        padding: 20px; /* Ajusta el espaciado según tus preferencias */
+    }
+
+    .header-content h1 {
+        font-size: 40px; /* Ajusta el tamaño del título según tus preferencias */
+        line-height: 60px; /* Ajusta la altura de línea según tus preferencias */
+    }
+
+    .header-content p {
+        font-size: 20px; /* Ajusta el tamaño del párrafo según tus preferencias */
+        padding: 0 20px;
+    }
+
+    .taq-content h2 {
+        font-size: 40px; /* Ajusta el tamaño del título según tus preferencias */
+        line-height: 50px; /* Ajusta la altura de línea según tus preferencias */
+        padding: 0 20px;
+        margin-top: 50px;
+    }
+
+
+    .center-button{
+        margin-top: 500px;
+    }
+
+    .footer img {
+    max-width: 100%; /* Hace que la imagen se ajuste al ancho máximo de su contenedor */
+    height: auto; /* Mantiene la proporción de aspecto original de la imagen */
+    display: block; /* Elimina cualquier espacio en blanco debajo de la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente en su contenedor */
+    margin-bottom: 30px;
+}
+
+.precios ul li {
+    font-size: 25px;
+    white-space: nowrap; /* Evita que los elementos se envuelvan al siguiente renglón */
+    margin-right: 20px; /* Añade espacio entre elementos */
+    font-weight: bold;
+    text-align: center;
+    margin-left: 10px;
+}
+
+}
+       
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="contenedor-total">
+    <header class="header">
+        <div class="menu container">
+            <a class="logo"><img src="../imagenes/LOGO_TAQ_SINFONDO.png" alt="" style="width: 150px; margin-top: 100px;"></a>
+            <input type="checkbox" id="menu">
+            <nav class="navbar">
+                <ul>
+                    <li>
+                    <a href="inicio.html">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="ubicacion.html">Ubicación</a>
+                    </li>
+                    <li>
+                        <a href="+productos.html">Más productos</a>
+                    </li>
+
+                    <li>
+                        <a href="asistente.html">Asistente de voz</a>
+                    </li>
+                    
+                    <li>
+                        <a href="cliente.php">Pedido</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-content container">
+            <h1>TAQUERIA CHESTER</h1>
+            <P>En calidad, precio, sabor, somos la mejor opción.</P>
+        </div>
+       
+        
+    </header>
+    <div class="center-button">
+        <button id="assistantButton">Activar Asistente</button>
+    </div>
+    
+    <section>
+        <div class="taq-content">
+            <h2 class="txt-p">Lo que te ofrecemos</h2>
+            <p style="font-size: 30px; color: white;">En Taquería Chester te ofrecemos: Sabor auténtico, donde los sabores se abrazan en cada taco. 
+                Descubre el auténtico sabor en Chester, donde cada bocado es un viaje de sabor, servido con amor y dedicación. ¡Los tacos más auténticos están en 
+                Taquería Chester, donde hacemos tacos, no excusas!</p>
+            <br><br>
+        </div>
+        
+        <div class="container">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../imagenes/tacos4.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>MACIZA</h2>
+                    <p>En Taquería Chester, usamos la "maciza" para nuestras carnitas. Es la parte magra de la carne de cerdo, cocinada lentamente en 
+                        su propia grasa para un sabor suave y único.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../imagenes/tacos2.png" alt="">
+                </div>
+                <div class="content">
+                    <h2>TROMPA</h2>
+                    <p>¡La "trompa"! Es la parte de la cabeza del cerdo que cocinamos a la perfección. 
+                        Resulta crujiente por fuera y tierna por dentro, dejando grandes sabores en cada bocado.</p>                
+                    </div>
+            </div>
+    
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../imagenes/costilla.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>COSTILLAS</h2>
+                    <p>La "costilla" es una 
+                        experiencia única. Son trozos de carne de cerdo cocidos hasta que se desprenden con facilidad del hueso, lo que le da un sabor auténtico y una textura suave y jugosa. </p>                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="precios">
+
+        <h2 style="text-align: center; font-size: 35px; color: black; background-color: #fff;" >¡GRANDES PRECIOS!</h2>
+            <ul style="background-color: rgb(255, 255, 255);">
+                <li style="color: black;">Tacos a solo $22</li>
+                <li style="color: black;">Tacos de costilla a solo $25</li>
+                <li style="color: black;">1/4 kg (250gr) a solo $75</li>
+                <li style="color: black;">1/2 kg (500gr) a solo $150</li>
+                <li style="color: black;">3/4 kg (750gr) a solo $225</li>
+                <li style="color: black;">1 kg (1000gr) a solo $300</li>
+            </ul>
+    </div>
+
+    <section>
+        <div class="container">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../imagenes/tacos3.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>CUERITO</h2>
+                    <p>Los "cueritos" son un verdadero placer para los amantes de la textura crujiente. 
+                        Son pedacitos de piel de cerdo que se fríen hasta que quedan dorados y crujientes.</p>               
+                     </div>
+            </div>
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../imagenes/tacos1.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>SURTIDA</h2>
+                    <p>En Taquería Chester, nuestras "carnitas surtidas" son una explosión de sabores. 
+                        Desde la maciza suave hasta la crujiente trompa, pasando por la jugosa costilla y los irresistibles cueritos, cada bocado te sorprenderá.</p>                
+                    </div>
+            </div>
+    
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../imagenes/tacos5.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>BUCHE</h2>
+                    <p>El "buche" es el estómago del cerdo, cocido a fuego lento hasta que se vuelve tierno y jugoso. 
+                        Su sabor se mezcla con nuestras especias y grasa especial, creando un bocado que nunca olvidarás.</p>                
+                    </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-content container" style="margin-top: -10px; padding-bottom: 0;">
+                <img src="../imagenes/FONDO-TRAS.png" alt="">
+        </div>
+    </footer>
+
+    </div>
+
+    <script>
+        // Función para el asistente de voz
+        function hablar(texto) {
+            if ('speechSynthesis' in window) {
+                const mensaje = new SpeechSynthesisUtterance(texto);
+                speechSynthesis.speak(mensaje);
+            } else {
+                console.log('La síntesis de voz no es compatible con este navegador.');
+            }
+        }
+    
+        // Obtener todos los elementos con la clase "content"
+        const elementosContent = document.querySelectorAll('.content');
+    
+        // Agregar el evento "mouseenter" a cada elemento "content"
+        elementosContent.forEach((elemento) => {
+            elemento.addEventListener('mouseenter', () => {
+                // Obtener el contenido del elemento
+                const contenido = elemento.textContent.trim();
+                hablar(contenido);
+            });
+        });
+    </script>
+    <script src="../CONTROLADOR/asistente.js"></script>
+</body>
+</html>

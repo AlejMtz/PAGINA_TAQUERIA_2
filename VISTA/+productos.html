@@ -1,0 +1,643 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación Taquería Chester</title>
+    <link rel="alternate" href="estilos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,700;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            /* Añade esto para apilar elementos verticalmente */
+            align-items: center;
+            /* Centra el contenido verticalmente */
+            margin: 0;
+            /* Agregado para quitar el margen predeterminado del body */
+
+            background-image: linear-gradient(135deg, orangered, #FF2E00, #FF4500, #FF5C00, #FF7300, #FF8B00, #FFA200);
+            background-size: 500%;
+            animation: fanimado 10s infinite;
+            
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            /* Ajusta la posición del div "container" para separarlo del encabezado */
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .container .card {
+            position: relative;
+            max-width: 300px;
+            height: 215px;
+            background-color: #fff;
+            margin: 30px 10px;
+            padding: 20px 15;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 202px rgba(0, 0, 0, 0.5);
+            /* Ajusta el valor de sombra */
+            transition: 0.3s ease-in-out;
+        }
+
+        .container .card:hover {
+            height: 420px;
+        }
+
+        .container .card .imgBx {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            top: -60px;
+            left: 20px;
+            z-index: 1;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            /* Ajusta el valor de sombra */
+        }
+
+        .container .card .imgBx img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        .container .card .content {
+            position: relative;
+            margin-top: -140px;
+            padding: 10px 15px;
+            text-align: center;
+            color: #111;
+            visibility: hidden;
+            opacity: 0;
+            transition-delay: 0.3s ease-in-out;
+        }
+
+        .container .card:hover .content {
+            visibility: visible;
+            opacity: 1;
+            margin-top: -40px;
+            transition-delay: 0.3s;
+        }
+
+        .header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)),
+                url(imagenes/taco_fondo.jpg);
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            position: absolute;
+            top: -235px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            margin-top: 100px;
+            margin-left: 230px;
+        }
+
+        .menu .navbar ul li a {
+            font-size: 25px;
+            padding: 20px;
+            color: aliceblue;
+            display: block;
+            font-weight: 600;
+            margin-top: -70px;
+        }
+
+        .menu .navbar ul li {
+            position: relative;
+            float: left;
+        }
+
+        #menu {
+            display: none;
+        }
+
+        .menu-icono {
+            width: 25px;
+        }
+
+        .menu label {
+            cursor: pointer;
+            display: none;
+        }
+
+        .header-content {
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 55px;
+            line-height: 80px;
+            color: #F9FAFC;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+        }
+
+        .header-content p {
+            font-size: 30px;
+            color: aliceblue;
+            padding: 0 250px;
+            margin-bottom: 25px;
+        }
+
+        /* Estilos para el carrusel */
+        .box {
+            width: 150px;
+            height: 200px;
+            transform-style: preserve-3d;
+            animation: animate 20s linear infinite;
+            margin-top: 200px;
+            /* Espacio entre el header y el carrusel */
+            margin-left: 500px;
+            margin-bottom: 200px;
+            display: flex;
+            justify-content: center;
+            /* Centrar horizontalmente */
+            align-items: center;
+            /* Centrar verticalmente */
+
+        }
+
+        @keyframes animate {
+            0% {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+
+            100% {
+                transform: perspective(1000px) rotateY(360deg);
+            }
+        }
+
+        .box span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+            transform-style: preserve-3d;
+            transform: rotateY(calc(var(--i)* 45deg)) translateZ(400px);
+            -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0004);
+        }
+
+        .box span img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .productos {
+            padding: 100px 0;
+            background-color: aliceblue;
+            position: relative;
+        }
+
+        .productos-content {
+            text-align: center;
+        }
+
+        .productos-content h2 {
+            font-size: 55px;
+            line-height: 70px;
+            color: #323337;
+            text-transform: uppercase;
+            padding: 0 250px;
+            margin-bottom: 15px;
+        }
+
+
+        .txt-p {
+            font-size: 35px;
+            color: #414247;
+            padding: 0 250px;
+            margin-bottom: 35px;
+        }
+
+        .productos-grupo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .producto-1 {
+            padding: 0 25px;
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 140px;
+        }
+
+        .producto-1 img {
+            width: 200px;
+            /* Tamaño fijo para todas las imágenes */
+            height: auto;
+            /* Para mantener la proporción de aspecto */
+        }
+
+        .producto-1 .producto-info {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .producto-1:hover .producto-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .producto-1 h3 {
+            color: #323337;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        @keyframes fanimado {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @media(max-width:991px) {
+            .menu {
+                padding: 30px;
+            }
+
+            .menu label {
+                display: initial;
+            }
+
+            .menu .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #323337;
+                display: none;
+            }
+
+            .menu .navbar ul li {
+                width: 100%;
+            }
+
+            #menu:checked~.navbar {
+                display: initial;
+            }
+
+            .header {
+                min-height: 0vh;
+            }
+
+            .header-content {
+                padding: 100px 30px;
+            }
+
+            .header-content p {
+                padding: 0;
+            }
+
+            .productos {
+                padding: 30px;
+            }
+
+            .productos-content h2 {
+                padding: 0;
+            }
+
+            .txt-p {
+                padding: 0;
+            }
+
+            .productos-grupo {
+                flex-direction: column;
+                margin-bottom: 0;
+            }
+
+            .productos-img {
+                display: none;
+            }
+
+        }
+
+        /*ESTILO DE BOTON ASISTENTE*/
+        #assistantButton {
+            padding: 10px 40px;
+            font-size: 18px;
+            background-color: #008542;
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 25%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 0;
+            z-index: 1;
+            user-select: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: unset;
+            padding: .8rem 1.5rem;
+            text-decoration: none;
+            font-weight: 900;
+            transition: all 0.7s cubic-bezier(0, .8, .26, .99);
+        }
+
+        #assistantButton:before {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            content: '';
+            transition: .7s cubic-bezier(0, .8, .26, .99);
+            z-index: -1;
+            background-color: #008542 !important;
+            box-shadow: 0 -4px rgb(21 108 0 / 50%) inset, 0 4px rgb(100 253 31 / 99%) inset, -4px 0 rgb(100 253 31 / 50%) inset, 4px 0 rgb(21 108 0 / 50%) inset;
+        }
+
+        #assistantButton:after {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            content: '';
+            box-shadow: 0 4px 0 0 rgb(0 0 0 / 15%);
+            transition: .7s cubic-bezier(0, .8, .26, .99);
+        }
+
+        #assistantButton:hover:before {
+            box-shadow: 0 -4px rgb(0 0 0 / 50%) inset, 0 4px rgb(255 255 255 / 20%) inset, -4px 0 rgb(255 255 255 / 20%) inset, 4px 0 rgb(0 0 0 / 50%) inset;
+        }
+
+        #assistantButton:hover:after {
+            box-shadow: 0 4px 0 0 rgb(0 0 0 / 15%);
+        }
+
+        #assistantButton:active {
+            transform: translateY(4px);
+        }
+
+        #assistantButton:active:after {
+            box-shadow: 0 0px 0 0 rgb(0 0 0 / 15%);
+        }
+
+
+        /* Estilos para centrar el botón horizontalmente */
+        .center-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+
+        /* Media query para pantallas más pequeñas, como dispositivos móviles */
+        @media screen and (max-width: 1100px) {
+            .container {
+                margin: 50px auto 0;
+                padding: 10px;
+                width: 100%;
+                margin-top: -200px;
+            }
+
+            .menu .logo {
+                display: block;
+                margin-left: 100px;
+                margin-top: 700px;
+            }
+
+            .menu .navbar {
+                display: block;
+                padding-top: 40px;
+            }
+
+            .menu .navbar ul li {
+                font-size: 20px;
+                /* Ajusta el tamaño del texto según tus preferencias */
+                padding: 20px;
+                /* Ajusta el espaciado según tus preferencias */
+            }
+
+            .header-content h1 {
+                font-size: 30px;
+                text-align: center;
+                margin-top: 300px;
+            }
+
+            .header-content p {
+                font-size: 30px;
+                text-align: center;
+            }
+
+            .container .card {
+                margin-top: 150px;
+            }
+
+            .center-button {
+                margin-top: 500px;
+                padding-bottom: 150px;
+            }
+
+            .footer img {
+                max-width: 100%;
+                /* Hace que la imagen se ajuste al ancho máximo de su contenedor */
+                height: auto;
+                /* Mantiene la proporción de aspecto original de la imagen */
+                display: block;
+                /* Elimina cualquier espacio en blanco debajo de la imagen */
+                margin: 0 auto;
+                /* Centra la imagen horizontalmente en su contenedor */
+                margin-bottom: 30px;
+                margin-top: -150px;
+            }
+
+            .box {
+                display: none;
+            }
+
+        }
+
+        .footer {
+    margin-top: -250px;
+   
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="menu container">
+            <a href="#" class="logo"><img src="imagenes/LOGO_TAQ_SINFONDO.png" alt=""
+                    style="width: 150px; margin-top: 100px;"></a>
+            <input type="checkbox" id="menu">
+            <label for="menu">
+                <img src="" class="" alt="">
+            </label>
+            <nav class="navbar">
+                <ul>
+                    <li>
+                        <a href="inicio.html">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="ubicacion.html">Ubicación</a>
+                    </li>
+
+                    <li>
+                        <a href="asistente.html">Asistente de voz</a>
+                    </li>
+
+                    <li>
+                        <a href="cliente.php">Pedido</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-content container">
+            <h1>TAQUERIA CHESTER</h1>
+            <P>En calidad, precio, sabor, somos la mejor opción.</P>
+        </div>
+
+        <!-- Contenedor del carrusel -->
+        <div class="box">
+            <span style="--i:1;"><img src="imagenes/carnitas1.jpg" alt=""></span>
+            <span style="--i:2;"><img src="imagenes/carnitas2.jpg" alt=""></span>
+            <span style="--i:3;"><img src="imagenes/carnitas3.jpg" alt=""></span>
+            <span style="--i:4;"><img src="imagenes/carnitas4.jpg" alt=""></span>
+            <span style="--i:5;"><img src="imagenes/carnitas5.jpg" alt=""></span>
+        </div>
+    </header>
+
+    <section style="margin-bottom: 200px;">
+        <div class="center-button">
+            <button id="assistantButton">Activar Asistente</button>
+        </div>
+        <div class="container">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="imagenes/refresco.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>REFRESCOS</h2>
+                    <p>En Taquería Chester, contamos con una variedad de refrescos para que puedas disfrutar de tu
+                        comida. No hay nada mejor que acompañar tu comida con un buen refresco.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="imgBx">
+                    <img src="imagenes/cervezas.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>CERVEZAS</h2>
+                    <p>En Taquería Chester, te ofrecemos cervezas para acompañar tu comida. Una cerveza fría y una
+                        comida deliciosa es lo mejor que puedes tener.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="imgBx">
+                    <img src="imagenes/jugos.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>JUGOS</h2>
+                    <p>Si no eres fan de los refrescos ni de la cerveza, también puedes pedir un buen jugo frío. ¿Qué
+                        más puedes pedir además de una buena comida y un buen jugo?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content container">
+            <img src="imagenes/FONDO-TRAS.png" alt="">
+        </div>
+    </footer>
+
+    <script>
+        // Función para el asistente de voz
+        function hablar(texto) {
+            if ('speechSynthesis' in window) {
+                const mensaje = new SpeechSynthesisUtterance(texto);
+                speechSynthesis.speak(mensaje);
+            } else {
+                console.log('La síntesis de voz no es compatible con este navegador.');
+            }
+        }
+
+        // Obtener todos los elementos con la clase "content"
+        const elementosContent = document.querySelectorAll('.content');
+
+        // Agregar el evento "mouseenter" a cada elemento "content"
+        elementosContent.forEach((elemento) => {
+            elemento.addEventListener('mouseenter', () => {
+                // Obtener el contenido del elemento
+                const contenido = elemento.textContent.trim();
+                hablar(contenido);
+            });
+        });
+    </script>
+    <script src="asistente.js"></script>
+
+</body>
+
+</html>

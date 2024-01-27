@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Carrito de Compras</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <style>
+        /* Tu estilo CSS existente aquí */
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,700;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(135deg, orangered, #FF2E00, #FF4500, #FF5C00, #FF7300, #FF8B00, #FFA200);
+            background-size: 500%;
+            animation: fanimado 10s infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+
+        .menu {
+            position: absolute;
+            top: -235px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+
+        .logo {
+            margin-top: 100px;
+            margin-left: -60px;
+        }
+
+        .logo img {
+            width: 150px;
+            margin-top: 100px;
+            animation: girarLogo 3s linear forwards;
+            /* forwards hace que la animación se detenga al final */
+        }
+
+        @keyframes girarLogo {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .menu .navbar ul li a {
+            font-size: 25px;
+            padding: 20px;
+            color: aliceblue;
+            display: block;
+            font-weight: 600;
+            margin-top: -70px;
+        }
+
+        .menu .navbar ul li {
+            position: relative;
+            float: left;
+        }
+
+        #menu {
+            display: none;
+        }
+
+        .menu label {
+            cursor: pointer;
+            display: none;
+        }
+
+        .header-content {
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 55px;
+            line-height: 80px;
+            color: #F9FAFC;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+        }
+
+        .header-content p {
+            font-size: 30px;
+            color: aliceblue;
+            padding: 0 250px;
+            margin-bottom: 25px;
+        }
+
+        .header-content container h2 {
+            margin-left: 120px;
+            margin-bottom: 250px;
+        }
+
+        .producto b {
+            font-size: 25px;
+        }
+
+        .cart {
+            margin-left: 500px;
+            margin-bottom: 20px;
+            border: #fff;
+        }
+
+        @media (max-width: 991px) {
+            .menu {
+                padding: 30px;
+            }
+
+            .menu label {
+                display: initial;
+            }
+
+            .menu .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #323337;
+                display: none;
+            }
+
+            .menu .navbar ul li {
+                width: 100%;
+            }
+
+            #menu:checked~.navbar {
+                display: initial;
+            }
+
+            .header {
+                min-height: 0vh;
+            }
+
+            .header-content {
+                padding: 100px 30px;
+            }
+
+            .header-content p {
+                padding: 0;
+            }
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 35px;
+        }
+
+
+        header {
+
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)),
+                url(imagenes/taco_fondo.jpg);
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 70vh;
+            display: flex;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-around;
+            padding: 2rem;
+        }
+
+
+        /* Estilos para los productos */
+        .productos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .producto {
+            width: 30%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            text-align: center;
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+
+
+        .producto img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+
+        }
+
+        .producto:hover {
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+            /* Agrega una sombra */
+            transition: transform 0.4s, box-shadow 0.4s;
+            /* Agrega una transición suave */
+            transform: scale(1.10);
+            /* Aumenta el tamaño al 105% */
+        }
+
+
+        .products,
+        .cart {
+            border: 3px solid #ccc;
+            padding: 1rem;
+            max-width: 400px;
+            font-size: 22px;
+        }
+
+
+
+        .product,
+        .cart-item {
+            border: 3px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #fff;
+        }
+
+
+        .add-to-cart {
+            padding: 10px 20px;
+            text-transform: uppercase;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 500;
+            color: black;
+            text-shadow: none;
+            background: transparent;
+            box-shadow: transparent;
+            border: 3px solid orangered;
+            transition: 0.5s ease;
+            user-select: none;
+        }
+
+        .add-to-cart:hover,
+        .add-to-cart:focus {
+            color: white;
+            background: orangered;
+            border: 1px solid orangered;
+            text-shadow: 0 0 5px black, 0 0 10px black, 0 0 20px black;
+            box-shadow: 0 0 5px #ff7b00, 0 0 20px #ff7b00, 0 0 50px #ff7b00, 0 0 100px #ff7b00;
+        }
+
+        button.remove-from-cart {
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        button.remove-from-cart:hover {
+            background-color: #c00;
+        }
+
+        /* Estilos para las imágenes en la lista de productos */
+        .product img {
+            max-width: 100%;
+            max-height: 200px;
+            /* Ajusta la altura máxima según tu preferencia */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            /* Centra la imagen horizontalmente */
+        }
+
+        /* Estilos para las imágenes pequeñas en el carrito */
+        .cart-item img {
+            max-width: 40px;
+            /* Ajusta el tamaño de la imagen según tu preferencia */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            /* Centra la imagen horizontalmente */
+        }
+
+        .comic-button {
+            /* Estilo para el botón de continuar a la confirmación */
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #008542;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px #000;
+            transition: all 0.3s ease;
+        }
+
+        .comic-button:hover {
+            background-color: #fff;
+            color: #008542;
+            border: 2px solid #134213;
+            box-shadow: 5px 5px 0px #134213;
+        }
+
+        .comic-button:active {
+            background-color: #fcf414;
+            box-shadow: none;
+            transform: translateY(4px);
+        }
+
+        @keyframes fanimado {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+
+        /* Media query para pantallas más pequeñas, como dispositivos móviles */
+        @media screen and (max-width: 1100px) {
+
+            .container {
+                margin: 50px auto 0;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .menu .navbar {
+                display: block;
+                padding-top: 40px;
+                margin-top: 50px;
+            }
+
+            .menu .navbar ul li {
+                font-size: 20px;
+                /* Ajusta el tamaño del texto según tus preferencias */
+                padding: 20px;
+                /* Ajusta el espaciado según tus preferencias */
+            }
+
+            .header-content h1 {
+                font-size: 40px;
+                /* Ajusta el tamaño del título según tus preferencias */
+                line-height: 60px;
+                /* Ajusta la altura de línea según tus preferencias */
+            }
+
+
+            .menu .logo {
+                display: block;
+                margin-left: 100px;
+                margin-top: 300px;
+            }
+
+            .header-content h2 {
+                font-size: 40px;
+                /* Ajusta el tamaño del título según tus preferencias */
+                justify-content: center;
+                margin-top: -400px;
+            }
+
+            .productos {
+                margin-top: 120px;
+            }
+
+            .producto {
+                max-width: 100%;
+            }
+
+            .producto h2 {
+                font-size: 15px;
+            }
+
+            .producto b {
+                font-size: 15px;
+            }
+
+            .add-to-cart {
+                max-width: 100%;
+                font-size: 10px;
+                padding-left: 10px;
+            }
+
+            .cart {
+                margin-left: 5px;
+                margin-bottom: 20px;
+                border: #fff;
+                margin-bottom: 70px;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="menu container">
+            <a href="#" class="logo"><img src="imagenes/LOGO_TAQ_SINFONDO.png" alt=""
+                    style="width: 150px; margin-top: 120px;"></a>
+            <input type="checkbox" id="menu">
+            <label for="menu">
+                <img src="" class="" alt="">
+            </label>
+            <nav class="navbar">
+                <ul>
+                    <li>
+                        <a href="inicio.html">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="ubicacion.html">Ubicación</a>
+                    </li>
+                    <li>
+                        <a href="+productos.html">Más productos</a>
+                    </li>
+                    <li>
+                        <a href="asistente.html">Asistente de voz</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+        <div class="header-content container">
+
+            <h2>Carrito de Compras</h2>
+
+        </div>
+
+        <div class="center-button">
+        </div>
+    </header>
+
+    <main>
+        <section class="productos">
+            <div class="producto">
+                <img src="imagenes/taco_maciza.jpg" alt="Tacos de maciza a solo $22">
+                <h2>Taco de maciza</h2>
+                <b>Precio: $22</b>
+                <button class="add-to-cart" data-product="Taco" data-precio="22">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/taco_trompa.jpg" alt="Tacos de trompa a solo $22">
+                <h2>Taco de trompa</h2>
+                <b>Precio: $22</b>
+                <button class="add-to-cart" data-product="Taco" data-precio="22">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/taco_costilla.jpg" alt="Tacos de costilla a solo $25">
+                <h2>Taco de costilla</h2>
+                <b>Precio: $25</b>
+                <button class="add-to-cart" data-product="Taco" data-precio="25">Agregar al Carrito</button>
+            </div>
+
+            <div class="producto">
+                <img src="imagenes/taco_cueritos.jpg" alt="Tacos de cueritos a solo $22">
+                <h2>Taco de cueritos</h2>
+                <b>Precio: $22</b>
+                <button class="add-to-cart" data-product="Taco" data-precio="22">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/taco_surtida.jpg" alt="Tacos de surtida a solo $22">
+                <h2>Taco de surtida</h2>
+                <b>Precio: $22</b>
+                <button class="add-to-cart" data-product="Taco" data-precio="22">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/taco_buche.jpg" alt="Tacos de buche a solo $22">
+                <h2>Taco de buche</h2>
+                <b>Precio: $22</b>
+                <button class="add-to-cart" data-product="Taco" data-precio="22">Agregar al Carrito</button>
+            </div>
+
+            <!--TERCERA FILA DE PRODUCTOS-->
+
+            <div class="producto">
+                <img src="imagenes/maciza.jpg" alt="1/4 kg de maciza (250gr) a solo $75">
+                <h2>1/4 kg (250gr) de maciza </h2>
+                <b>Precio: $75</b>
+                <button class="add-to-cart" data-product="1/4 kg (250gr)" data-precio="75">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/trompa.jpeg" alt="1/4 kg de trompa (250gr) a solo $75">
+                <h2>1/4 kg (250gr) de trompa </h2>
+                <b>Precio: $75</b>
+                <button class="add-to-cart" data-product="1/4 kg (250gr)" data-precio="75">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/costilla.jpg" alt="1/4 kg de costilla (250gr) a solo $75">
+                <h2>1/4 kg (250gr) de costilla </h2>
+                <b>Precio: $75</b>
+                <button class="add-to-cart" data-product="1/4 kg (250gr)" data-precio="75">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/cueritos.jpg" alt="1/4 kg de cueritos (250gr) a solo $75">
+                <h2>1/4 kg (250gr) de cueritos </h2>
+                <b>Precio: $75</b>
+                <button class="add-to-cart" data-product="1/4 kg (250gr)" data-precio="75">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/surtida.jpeg" alt="1/4 kg de surtida (250gr) a solo $75">
+                <h2>1/4 kg (250gr) de surtida </h2>
+                <b>Precio: $75</b>
+                <button class="add-to-cart" data-product="1/4 kg (250gr)" data-precio="75">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/buche.jpg" alt="1/4 kg de buche (250gr) a solo $75">
+                <h2>1/4 kg (250gr) de buche </h2>
+                <b>Precio: $75</b>
+                <button class="add-to-cart" data-product="1/4 kg (250gr)" data-precio="75">Agregar al Carrito</button>
+            </div>
+
+            <!--TERCERRA FILA DE PRODUCTOS-->
+            <div class="producto">
+                <img src="imagenes/maciza.jpg" alt="1/2 kg de maciza (500gr) a solo $150">
+                <h2>1/2 kg (500gr) de maciza</h2>
+                <b>Precio: $150</b>
+                <button class="add-to-cart" data-product="1/2 kg (500gr)" data-precio="150">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/trompa.jpeg" alt="1/2 kg de trompa (500gr) a solo $150">
+                <h2>1/2 kg (500gr) de trompa</h2>
+                <b>Precio: $150</b>
+                <button class="add-to-cart" data-product="1/2 kg (500gr)" data-precio="150">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/costilla.jpg" alt="1/2 kg de costilla (500gr) a solo $150">
+                <h2>1/2 kg (500gr) de costilla</h2>
+                <b>Precio: $150</b>
+                <button class="add-to-cart" data-product="1/2 kg (500gr)" data-precio="150">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/cueritos.jpg" alt="1/2 kg de cueritos (500gr) a solo $150">
+                <h2>1/2 kg (500gr) de cueritos</h2>
+                <b>Precio: $150</b>
+                <button class="add-to-cart" data-product="1/2 kg (500gr)" data-precio="150">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/surtida.jpeg" alt="1/2 kg de surtida (500gr) a solo $150">
+                <h2>1/2 kg (500gr) de surtida</h2>
+                <b>Precio: $150</b>
+                <button class="add-to-cart" data-product="1/2 kg (500gr)" data-precio="150">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/buche.jpg" alt="1/2 kg de buche (500gr) a solo $150">
+                <h2>1/2 kg (500gr) de buche</h2>
+                <b>Precio: $150</b>
+                <button class="add-to-cart" data-product="1/2 kg (500gr)" data-precio="150">Agregar al Carrito</button>
+            </div>
+
+
+
+            <!--CUARTA FILA DE PRODUCTOS-->
+
+            <div class="producto">
+                <img src="imagenes/maciza.jpg" alt="3/4 kg de maciza (750gr) a solo $225">
+                <h2>3/4 kg (750gr) de maciza</h2>
+                <b>Precio: $225</b>
+                <button class="add-to-cart" data-product="3/4 kg (750gr)" data-precio="225">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/trompa.jpeg" alt="3/4 kg de trompa (750gr) a solo $225">
+                <h2>3/4 kg (750gr) de trompa</h2>
+                <b>Precio: $225</b>
+                <button class="add-to-cart" data-product="3/4 kg (750gr)" data-precio="225">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/costilla.jpg" alt="3/4 kg de costilla (750gr) a solo $225">
+                <h2>3/4 kg (750gr) de costillas</h2>
+                <b>Precio: $225</b>
+                <button class="add-to-cart" data-product="3/4 kg (750gr)" data-precio="225">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/cueritos.jpg" alt="3/4 kg de cueritos (750gr) a solo $225">
+                <h2>3/4 kg (750gr) de cueritos</h2>
+                <b>Precio: $225</b>
+                <button class="add-to-cart" data-product="3/4 kg (750gr)" data-precio="225">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/surtida.jpeg" alt="3/4 kg de surtida (750gr) a solo $225">
+                <h2>3/4 kg (750gr) de surtida</h2>
+                <b>Precio: $225</b>
+                <button class="add-to-cart" data-product="3/4 kg (750gr)" data-precio="225">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/buche.jpg" alt="3/4 kg de buche (750gr) a solo $225">
+                <h2>3/4 kg (750gr) de buche</h2>
+                <b>Precio: $225</b>
+                <button class="add-to-cart" data-product="3/4 kg (750gr)" data-precio="225">Agregar al Carrito</button>
+            </div>
+
+
+
+            <div class="producto">
+                <img src="imagenes/maciza.jpg" alt="1 kg de maciza (1000gr) a solo $300">
+                <h2>1 kg (1000gr) de maciza</h2>
+                <b>Precio: $300</b>
+                <button class="add-to-cart" data-product="1 kg (1000gr)" data-precio="300">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/trompa.jpeg" alt="1 kg de trompa (1000gr) a solo $300">
+                <h2>1 kg (1000gr) de trompa</h2>
+                <b>Precio: $300</b>
+                <button class="add-to-cart" data-product="1 kg (1000gr)" data-precio="300">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/costilla.jpg" alt="1 kg de costilla (1000gr) a solo $300">
+                <h2>1 kg (1000gr) de costilla</h2>
+                <b>Precio: $300</b>
+                <button class="add-to-cart" data-product="1 kg (1000gr)" data-precio="300">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/cueritos.jpg" alt="1 kg de cueritos (1000gr) a solo $300">
+                <h2>1 kg (1000gr) de cueritos</h2>
+                <b>Precio: $300</b>
+                <button class="add-to-cart" data-product="1 kg (1000gr)" data-precio="300">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/surtida.jpeg" alt="1 kg de surtida (1000gr) a solo $300">
+                <h2>1 kg (1000gr) de surtida</h2>
+                <b>Precio: $300</b>
+                <button class="add-to-cart" data-product="1 kg (1000gr)" data-precio="300">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/buche.jpg" alt="1 kg de buche (1000gr) a solo $300">
+                <h2>1 kg (1000gr) de buche</h2>
+                <b>Precio: $300</b>
+                <button class="add-to-cart" data-product="1 kg (1000gr)" data-precio="300">Agregar al Carrito</button>
+            </div>
+
+            <!--QUINTA FILA DE PRODUCTOS-->
+
+            <div class="producto">
+                <img src="imagenes/refresco.jpg" alt="refresco a solo $22">
+                <h2>Refresco</h2>
+                <b>Precio: $22</b>
+                <button class="add-to-cart" data-product="refresco" data-precio="22">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/cervezas.jpg" alt="cerveza a solo $25">
+                <h2>Cerveza Corona</h2>
+                <b>Precio: $25</b>
+                <button class="add-to-cart" data-product="cerveza" data-precio="25">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="imagenes/jugos.jpg" alt="boing a solo $22">
+                <h2>Boing de mango</h2>
+                <b>Precio: $22</b>
+                <button class="add-to-cart" data-product="jugo" data-precio="22">Agregar al Carrito</button>
+            </div>
+
+
+            <!-- Agrega más productos aquí -->
+
+        </section>
+    </main>
+
+
+    <section class="cart">
+        <!-- El carrito de compras y su contenido existente aquí -->
+        <b style="font-size: 35px; color: white;">Carrito de compras</b>
+        <ul id="cart-items">
+            <!-- Los productos seleccionados se mostrarán aquí -->
+        </ul>
+        <b style="font-size: 25px; color: white;">Total a Pagar: $<span id="total">0.00</span></b>
+        <button id="finalizar-pedido" class="comic-button">Confirmar Pedido</button>
+    </section>
+
+
+    </div>
+
+    <script>
+        const cartItems = document.querySelector('#cart-items'); // Cambiado el selector a '#cart-items'
+        const cartTotal = document.querySelector('#total'); // Cambiado el selector a '#total'
+        const cartButton = document.querySelector('#finalizar-pedido'); // Cambiado el selector a '#finalizar-pedido'
+        const cartContent = document.querySelector('.cart'); // Cambiado el selector a '.cart'
+        const orderButton = document.querySelector('.comic-button'); // Cambiado el selector a '.comic-button'
+
+        const products = [
+            { name: 'Tacos de maciza a solo $22', price: 22.00, image: 'imagenes/tacos1.jpg' },
+            { name: 'Tacos de trompa a solo $22', price: 22.00, image: 'imagenes/tacos1.jpg' },
+            { name: 'Tacos de costilla a solo $25', price: 25.00, image: 'imagenes/costilla.jpg' },
+            { name: 'Tacos de cueritos a solo $22', price: 22.00, image: 'imagenes/tacos1.jpg' },
+            { name: 'Tacos de surtida a solo $22', price: 22.00, image: 'imagenes/tacos1.jpg' },
+            { name: 'Tacos de buche a solo $22', price: 22.00, image: 'imagenes/tacos1.jpg' },
+            { name: '1/4 kg de maciza (250gr) a solo $75', price: 75.00, image: 'imagenes/tacos2.png' },
+            { name: '1/4 kg de trompa (250gr) a solo $75', price: 75.00, image: 'imagenes/tacos2.png' },
+            { name: '1/4 kg de costilla (250gr) a solo $75', price: 75.00, image: 'imagenes/tacos2.png' },
+            { name: '1/4 kg de cueritos (250gr) a solo $75', price: 75.00, image: 'imagenes/tacos2.png' },
+            { name: '1/4 kg de surtida (250gr) a solo $75', price: 75.00, image: 'imagenes/tacos2.png' },
+            { name: '1/4 kg de buche (250gr) a solo $75', price: 75.00, image: 'imagenes/tacos2.png' },
+            { name: '1/2 kg de maciza (500gr) a solo $150', price: 150.00, image: 'imagenes/tacos3.jpg' },
+            { name: '1/2 kg de trompa (500gr) a solo $150', price: 150.00, image: 'imagenes/tacos3.jpg' },
+            { name: '1/2 kg de costilla (500gr) a solo $150', price: 150.00, image: 'imagenes/tacos3.jpg' },
+            { name: '1/2 kg de cueritos (500gr) a solo $150', price: 150.00, image: 'imagenes/tacos3.jpg' },
+            { name: '1/2 kg de surtida (500gr) a solo $150', price: 150.00, image: 'imagenes/tacos3.jpg' },
+            { name: '1/2 kg de buche (500gr) a solo $150', price: 150.00, image: 'imagenes/tacos3.jpg' },
+            { name: '3/4 kg de maciza (750gr) a solo $225', price: 225.00, image: 'imagenes/tacos4.jpg' },
+            { name: '3/4 kg de trompa (750gr) a solo $225', price: 225.00, image: 'imagenes/tacos4.jpg' },
+            { name: '3/4 kg de costilla (750gr) a solo $225', price: 225.00, image: 'imagenes/tacos4.jpg' },
+            { name: '3/4 kg de cueritos (750gr) a solo $225', price: 225.00, image: 'imagenes/tacos4.jpg' },
+            { name: '3/4 de surtida kg (750gr) a solo $225', price: 225.00, image: 'imagenes/tacos4.jpg' },
+            { name: '3/4 kg de buche (750gr) a solo $225', price: 225.00, image: 'imagenes/tacos4.jpg' },
+            { name: '1 kg de maciza (1000gr) a solo $300', price: 300.00, image: 'imagenes/tacos5.jpg' },
+            { name: '1 kg de trompa (1000gr) a solo $300', price: 300.00, image: 'imagenes/tacos5.jpg' },
+            { name: '1 kg de costilla (1000gr) a solo $300', price: 300.00, image: 'imagenes/tacos5.jpg' },
+            { name: '1 kg de cueritos (1000gr) a solo $300', price: 300.00, image: 'imagenes/tacos5.jpg' },
+            { name: '1 kg de surtida (1000gr) a solo $300', price: 300.00, image: 'imagenes/tacos5.jpg' },
+            { name: '1 kg de buche (1000gr) a solo $300', price: 300.00, image: 'imagenes/tacos5.jpg' },
+
+            { name: 'refresco a solo $22', price: 22.00, image: 'imagenes/refresco.jpg' },
+            { name: 'cerveza a solo $25', price: 25.00, image: 'imagenes/cervezas.jpg' },
+            { name: 'boing a solo $22', price: 22.00, image: 'imagenes/jugos.jpg' },
+
+            // Agrega más productos aquí si es necesario
+        ];
+
+        let cart = [];
+
+        function addToCart(product) {
+            cart.push(product);
+            renderCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            cart.forEach((product) => {
+                total += product.price;
+            });
+            return total.toFixed(2);
+        }
+        function getIDcliente() {
+            // Obteniendo la URL actual
+            var urlParams = new URLSearchParams(window.location.search);
+
+            // Obteniendo el valor de "cliente_id"
+            var clienteId = urlParams.get("cliente_id");
+            if (clienteId == null) clienteId = 0;
+            return clienteId;
+        }
+
+        function toggleCart() {
+            cartContent.classList.toggle('active');
+        }
+
+        function renderCart() {
+            cartItems.innerHTML = '';
+            cart.forEach((product, index) => {
+                const cartItem = document.createElement('li');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <span>${product.name} - $${product.price.toFixed(2)}</span>
+            <div class="cart-buttons">
+                <button class="remove-from-cart" onclick="removeFromCart(${index})">Eliminar</button>
+            </div>
+        `;
+                cartItems.appendChild(cartItem);
+            });
+
+            cartTotal.textContent = calculateTotal();
+
+            if (cart.length === 0) {
+                cartContent.classList.remove('active');
+            } else {
+                cartContent.classList.add('active');
+            }
+        }
+
+        cartButton.addEventListener('click', toggleCart);
+
+        orderButton.addEventListener('click', () => {
+            const cartData = {
+                IDcliente: getIDcliente(),
+                items: cart,
+                total: cartTotal.textContent
+            };
+
+            fetch('registra_compra.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cartData),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Pedido realizado. \nNúmero del ticket: " + data.id_ticket + " \nTotal: $" + data.total);
+                    cart = [];
+                    renderCart();
+
+                    // Redirigir a la página de inicio
+                    window.location.href = 'inicio.html'; // Cambia 'inicio.html' a la URL de tu página de inicio
+
+                })
+                .catch(error => {
+                    console.error('Error al realizar el pedido:', error);
+                });
+        });
+
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                addToCart(products[index]);
+            });
+        });
+
+        //generar pdf
+
+        orderButton.addEventListener('click', () => {
+            const cartData = {
+                IDcliente: getIDcliente(),
+                items: cart,
+                total: cartTotal.textContent
+            };
+
+            // Realiza una solicitud POST al archivo generar_pdf.php
+            fetch('generar_pdf.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cartData),
+            })
+                .then(response => response.blob())
+                .then(data => {
+                    // Crear un objeto Blob con los datos del PDF
+                    const blob = new Blob([data], { type: 'application/pdf' });
+
+                    // Crear una URL para el Blob
+                    const pdfUrl = URL.createObjectURL(blob);
+
+                    // Crear un enlace para descargar el PDF
+                    const a = document.createElement('a');
+                    a.href = pdfUrl;
+                    a.download = 'Pedido.pdf'; // Nombre del archivo PDF
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+
+                    // Limpiar el carrito después de generar el PDF
+                    cart = [];
+                    renderCart();
+                })
+                .catch(error => {
+                    console.error('Error al realizar el pedido:', error);
+                });
+        });
+
+    </script>
+
+    <script>
+        // Función para el asistente de voz
+        function hablar(texto) {
+            if ('speechSynthesis' in window) {
+                const mensaje = new SpeechSynthesisUtterance(texto);
+                speechSynthesis.speak(mensaje);
+            } else {
+                console.log('La síntesis de voz no es compatible con este navegador.');
+            }
+        }
+
+        // Agregar el evento clic al botón "Agregar al Carrito"
+        const botonesAgregar = document.querySelectorAll('.add-to-cart');
+        botonesAgregar.forEach((boton) => {
+            boton.addEventListener('click', () => {
+                const productoNombre = boton.getAttribute('data-product');
+                hablar(`Producto ${productoNombre} agregado al carrito`);
+            });
+        });
+
+        // Función de bienvenida del asistente de voz
+        function darBienvenida() {
+            const mensajeBienvenida = "Bienvenido al carrito de compras de Taqueía Chester";
+            hablar(mensajeBienvenida);
+        }
+
+        // Llamar a la función de bienvenida cuando se carga la página
+        window.addEventListener('load', darBienvenida);
+    </script>
+
+
+    <script src="asistente.js"></script>
+    <script src="carrito.js"></script>
+    <script src="asistente_carrito.js"></script>
+
+
+</body>
+
+</html>
