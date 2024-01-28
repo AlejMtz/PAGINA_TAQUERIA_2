@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
-     <script src="carrito.js"></script>
+     <script src="../CONTROLADOR/carrito.js"></script>
     
 
 
@@ -169,7 +169,7 @@ h2 {
         rgba(0, 0, 0, 0.7),
         rgba(0, 0, 0, 0.7)
     ),
-    url(imagenes/taco_fondo.jpg);
+    url(../imagenes/taco_fondo.jpg);
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: cover;
@@ -645,7 +645,7 @@ h2 {
 <body>
     <header>
         <div class="menu container">
-            <a href="#" class="logo"><img src="imagenes/LOGO_TAQ_SINFONDO.png" alt="" style="width: 150px; margin-top: 120px;"></a>
+            <a href="#" class="logo"><img src="../imagenes/LOGO_TAQ_SINFONDO.png" alt="" style="width: 150px; margin-top: 120px;"></a>
             <input type="checkbox" id="menu">
             <label for="menu">
                 <img src="" class="" alt="">
@@ -685,11 +685,11 @@ h2 {
 
     <div class="formu" style="display: flex; justify-content: space-between; align-items: center;">
 
-    <img src="imagenes/LOGO_TAQ_SINFONDO.png" alt="" style="width: 150px; height: 150px; margin-left: 30px; margin-right:30px;">
+    <img src="../imagenes/LOGO_TAQ_SINFONDO.png" alt="" style="width: 150px; height: 150px; margin-left: 30px; margin-right:30px;">
 
     <div class="formulario">
 
-    <form action="procesar_cliente.php" method="POST" class="form" style="margin-top: 80px;" onsubmit="return validarFormulario();">
+    <form action="../MODELO/procesar_cliente.php" method="POST" class="form" style="margin-top: 80px;" onsubmit="return validarFormulario();">
     
         
         <label for="nombre" style="color: white;">Nombre:</label>
@@ -839,7 +839,7 @@ h2 {
 
 <footer class="footer">
         <div class="footer-content container" style="margin-top: -10px; padding-bottom: 0;">
-                <img src="imagenes/FONDO-TRAS.png" alt="">
+                <img src="../imagenes/FONDO-TRAS.png" alt="">
         </div>
     </footer>
 </body>
