@@ -1,0 +1,165 @@
+body {
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  header {
+    background-color: #ff6f00;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+  
+  .logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 100px;
+  }
+  
+  nav {
+    background-color: #ffd180;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+    font-weight: 700;
+    font-size: 1.2em;
+  }
+  
+  section {
+    padding: 20px;
+  }
+  
+  h3 {
+    color: #ff6f00;
+    margin-left: 15px;
+    font-size: 35px;;
+  }
+  ol a{
+    color: white;
+    font-size: 18px;
+  }
+  /* Estilos para los productos */
+  .productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid #ff6f00;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .producto b {
+    font-size: 20px;
+  }
+  
+  .producto {
+    width: 30%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background-color: #ffd180;
+    border-radius: 4px;
+  }
+  
+  
+  .producto img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  
+  }
+  
+  .producto:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+    /* Agrega una sombra */
+    transition: transform 0.4s, box-shadow 0.4s;
+    /* Agrega una transición suave */
+    transform: scale(1.10);
+    /* Aumenta el tamaño al 105% */
+  }
+  
+  /* Estilos para las imágenes en la lista de productos */
+  .product img {
+    max-width: 100%;
+    max-height: 200px;
+    /* Ajusta la altura máxima según tu preferencia */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    /* Centra la imagen horizontalmente */
+  }
+  
+  .ver-menu {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff6f00;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100px;
+    
+  }
+  
+  .mapa {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+  }
+
+  .boton-asistente button {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .boton-asistente button.presionado {
+    transform: scale(1.2); 
+  }
+  
+  .boton-asistente {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px; 
+  }
+  
+  .boton-asistente button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .boton-asistente button img {
+    width: 100px; 
+    height: 100px;
+  }
+  
+  .imagenFooter {
+    width: 100%;
+    height: 500px;
+  }
+  
+  footer {
+    background-color: #ff6f00;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    margin-top: 100px;
+  }

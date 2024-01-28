@@ -17,27 +17,6 @@ function changePageAndAnnounce(pageName) {
 
 // Declara una bandera para controlar si ya se ha dado una respuesta
 let hasAnswered = false;
-
-// Función para manejar las preguntas y respuestas
-function handleQuestions(transcript) {
-    let respuesta = ''; // Variable para almacenar la respuesta
-    
-    if (transcript.includes('horario del local')) {
-        respuesta = "Puedes encontrarnos desde las 9 de la mañana y hasta las 5 de la tarde de lunes a domingo los 365 días del año";
-    } else if (transcript.includes('¿qué carne venden?')) {
-        respuesta = "Tenemos una variedad de carne, maciza, trompa, costilla, cueritos, surtida y buche, además de ofrecerte refresco, jugo o cerveza";
-    } else if (transcript.includes('¿qué precios tienen?')) {
-        respuesta = "Te ofrecemos: tacos a 22 pesos, 1/4 de kilo a solo 75 pesos, el medio kilo a 150 pesos, 3/4 de kilo a 225 pesos, 1 kg a solo 300 pesos, refresco y jugos a 22 pesos y cerveza a 25 pesos";
-    } else {
-        respuesta = 'Lo siento, no entiendo la pregunta.';
-    }
-
-    // Verifica si ya se ha dado una respuesta antes de decir una nueva respuesta
-    if (!hasAnswered) {
-        speak(respuesta);
-        hasAnswered = true;
-    }
-}
 // Función para activar o desactivar el asistente
 function toggleAssistant() {
     if (!isAssistantActive) {
@@ -73,9 +52,6 @@ function toggleAssistant() {
                 } else {
                     speak('Lo siento, no entendí a qué página deseas ir.');
                 }
-            } else {
-                // Agrega el manejo de preguntas y respuestas
-                handleQuestions(transcript);
             }
         };
 
@@ -100,17 +76,21 @@ function toggleAssistant() {
 
     // Actualiza el texto del botón para reflejar el estado del asistente
     const assistantButton = document.getElementById('assistantButton');
-    const buttonText = isAssistantActive ? 'Desactivar Asistente' : 'Activar Asistente';
-    assistantButton.textContent = buttonText;
+    assistantButton.classList.toggle('activo', isAssistantActive);
+   
 }
 
-// Agregar un evento de clic al botón para activar/desactivar el asistente
 const assistantButton = document.getElementById('assistantButton');
-assistantButton.addEventListener('click', toggleAssistant);
+    assistantButton.addEventListener('click', toggleAssistant);
 
+    assistantButton.addEventListener('mousedown', () => {
+        assistantButton.classList.add('presionado');
+    });
 
-// Verificar si el navegador es compatible con el reconocimiento de voz
-if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) {
-    // Si el reconocimiento de voz no es compatible con el navegador
-    console.log('Reconocimiento de voz no compatible.');
-}
+    assistantButton.addEventListener('mouseup', () => {
+        assistantButton.classList.remove('presionado');
+    });
+
+    if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) {
+        console.log('Reconocimiento de voz no compatible.');
+    }

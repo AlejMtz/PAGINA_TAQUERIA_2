@@ -1,5 +1,5 @@
 <?php
-// Conexión a la base de datos (reemplaza con tus propios datos de conexión)
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -26,7 +26,7 @@ if ($conn->query($sqlInsertCliente) === TRUE) {
     $cliente_id = $conn->insert_id;
 
     // Redirigir al cliente a la página de carrito
-    header("Location: carrito.html?cliente_id=$cliente_id");
+    header("Location: ../VISTA/carrito.html?cliente_id=$cliente_id");
     $cliente_id = $conn->insert_id;
 
     exit();
