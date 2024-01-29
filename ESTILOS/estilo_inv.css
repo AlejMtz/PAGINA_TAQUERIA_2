@@ -30,3 +30,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.titulo {
+    text-align: center;
+}

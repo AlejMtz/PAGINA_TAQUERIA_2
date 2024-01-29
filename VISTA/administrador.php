@@ -19,65 +19,21 @@
   </header>
 
   <nav>
-    <a href="../VISTA/inicio.html">Inicio</a>
+    <a href="../VISTA/inventario.php">Inventario</a>
   </nav>
 
-  <h3>Inventario de Taquería Chester</h3>
-  <h2>Agregar Producto al Inventario</h2>
+  <h3>Pagina del administrador Taquería Chester</h3>
+  <h2>Administra tus productos</h2>
 
-  <!-- Formulario para agregar productos -->
-  <form action="../MODELO/guardar_productos.php" method="POST">
-    <!-- Campos del formulario -->
-    <label for="nombreProducto">Nombre del Producto:</label>
-    <input type="text" name="nombreProducto" id="nombreProducto" required>
-
-    <label for="cantidad">Cantidad (kg o piezas):</label>
-    <input type="number" name="cantidad" id="cantidad" required>
-    
-    <label for="precio">Precio:</label>
-    <input type="number" name="precio" id="precio" required>
-    
-    <label for="descripcion">Descripción:</label>
-    <textarea name="descripcion" id="descripcion" required></textarea>
-
-    <label for="categoria">Categoría:</label>
-    <select name="categoria" id="categoria">
-        <option value="carnes">Carnes</option>
-        <option value="verduras">Verduras</option>
-        <option value="frutas">Frutas</option>
-        <option value="refrescos">Refrescos</option>
-    </select>
-
-    <!-- Botón para enviar el formulario -->
-    <br>
-    <br>
-    <button type="submit">Guardar Producto</button>
-  </form>
-
-  <!-- Mensajes de éxito o error -->
-  <?php
-  // Verificar si hay un mensaje de éxito o error
-  if (isset($_SESSION["status"])) {
-      if ($_SESSION["status"] == "success") {
-          echo '<p style="color: green;">Producto guardado correctamente.</p>';
-      } elseif ($_SESSION["status"] == "error") {
-          echo '<p style="color: red;">Error al guardar el producto.</p>';
-      }
-      // Limpiar el mensaje después de mostrarlo
-      unset($_SESSION["status"]);
-  }
-  ?>
-
-  <!-- Tabla para mostrar el inventario -->
-  <table border="1">
+    <!-- Tabla para mostrar el inventario -->
+    <table border="1">
   <tr>
     <th>ID</th>
     <th>Nombre</th>
-    <th>Cantidad</th>
-    <th>Descripción</th>
     <th>Categoría</th>
+    <th>Descripción</th>
     <th>Precio</th>
-    <th>Acciones</th> <!-- Nueva columna para acciones -->
+    <th>Acciones</th>
   </tr>
 
   <?php
@@ -96,7 +52,7 @@
   }
 
   // Obtener registros de la base de datos
-  $sqlSelectProductos = "SELECT * FROM inventario";
+  $sqlSelectProductos = "SELECT * FROM productos";
   $result = $conn->query($sqlSelectProductos);
 
   if ($result->num_rows > 0) {
@@ -104,15 +60,15 @@
           echo '<tr>';
           echo '<td>' . $row["id"] . '</td>';
           echo '<td>' . $row["nombre"] . '</td>';
-          echo '<td>' . $row["cantidad"] . '</td>';
-          echo '<td>' . $row["descripcion"] . '</td>';
           echo '<td>' . $row["categoria"] . '</td>';
+          echo '<td>' . $row["descripcion"] . '</td>';
           echo '<td>' . $row["precio"] . '</td>';
+          
           
           //ACTUALIZAR O ELIMINAR
           echo '<td>';
-          echo '<a href="../MODELO/modificar_producto.php?id=' . $row["id"] . '">Modificar</a> | ';
-          echo '<a href="../MODELO/eliminar_producto.php?id=' . $row["id"] . '">Eliminar</a>';
+          echo '<a href="../MODELO/modificar_tacos.php?id=' . $row["id"] . '">Modificar</a> | ';
+          echo '<a href="../MODELO/eliminar_tacos.php?id=' . $row["id"] . '">Eliminar</a>';
           echo '</td>';
           echo '</tr>';
       }
@@ -121,6 +77,41 @@
   }
   ?>
 </table>
+<br>
+<br>
+
+<h3 class="titulo">AGREGA MÁS PRODUCTOS</h3>
+  <!-- Formulario para agregar productos -->
+  <form action="../MODELO/guardar_tacos.php" method="POST">
+    <!-- Campos del formulario -->
+    <label for="nombreProducto">Nombre del Producto:</label>
+    <input type="text" name="nombreProducto" id="nombreProducto" required>
+
+    <br> <br>
+    <label for="categoria">Categoría:</label>
+    <select name="categoria" id="categoria">
+        <option value="Tacos">Tacos</option>
+        <option value="1/4 de kilo">1/4 de kilo</option>
+        <option value="1/2 de kilo">1/2 de kilo</option>
+        <option value="3/4 de kilo">3/4 de kilo</option>
+        <option value="kilo">1 kilo</option>
+        <option value="refrescos">refrescos</option>
+        <option value="tortas">tortas</option>
+    </select>
+
+    <br> <br>
+    <label for="precio">Precio:</label>
+    <input type="number" name="precio" id="precio" required>
+    <br><br>
+    <label for="descripcion">Descripción:</label>
+    <textarea name="descripcion" id="descripcion" required></textarea>
+
+
+    <!-- Botón para enviar el formulario -->
+    <br>
+    <br>
+    <button type="submit">Guardar Producto</button>
+  </form>
 
 
   <footer>
