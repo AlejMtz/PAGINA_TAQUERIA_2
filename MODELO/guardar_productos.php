@@ -1,4 +1,6 @@
 <?php
+session_start(); // Inicia la sesión
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -15,17 +17,25 @@ if ($conn->connect_error) {
 $nombreProducto = $_POST["nombreProducto"];
 $cantidad = $_POST["cantidad"];
 $descripcion = $_POST["descripcion"];
+$categoria = $_POST["categoria"];
+$precio = $_POST["precio"];
 
 // Insertar datos del producto en la tabla 'inventario'
-$sqlInsertProducto = "INSERT INTO inventario (nombre, cantidad, descripcion) VALUES ('$nombreProducto', '$cantidad', '$descripcion')";
+$sqlInsertProducto = "INSERT INTO inventario (nombre, cantidad, descripcion, categoria, precio) VALUES ('$nombreProducto', '$cantidad', '$descripcion', '$categoria', '$precio')";
 
 if ($conn->query($sqlInsertProducto) === TRUE) {
-    // Redirigir al formulario con un mensaje de éxito
-    header("Location: index.html?status=success");
+    // Establecer una variable de sesión para el mensaje de éxito
+    $_SESSION["status"] = "success";
+
+    // Redirigir al formulario
+    header("Location: index.html");
     exit();
 } else {
-    // Redirigir al formulario con un mensaje de error
-    header("Location: index.html?status=error");
+    // Establecer una variable de sesión para el mensaje de error
+    $_SESSION["status"] = "error";
+
+    // Redirigir al formulario
+    header("Location: index.html");
     exit();
 }
 
