@@ -77,8 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </header>
 
 
-  <h3>Inventario de Taquería Chester</h3>
-  <h2>Modifica el producto de tu inventario</h2>
+  <h3>Productos de la Taquería Chester</h3>
+  <h2>Modifica el producto de la taquería</h2>
 
  
 <!-- Formulario para modificar productos -->

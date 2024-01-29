@@ -1,0 +1,23 @@
+/* Agregamos estilos de presentación */
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px;
+  }
+
+  section {
+    width: 30%; /* Ajusta el ancho según tus necesidades */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  section p {
+    margin-top: 10px;
+  }

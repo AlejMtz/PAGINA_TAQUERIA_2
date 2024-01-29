@@ -19,7 +19,7 @@
   </header>
 
   <nav>
-    <a href="../VISTA/inicio.html">Inicio</a>
+    <a href="../VISTA/administrador.php">Administrador</a>
   </nav>
 
   <h3>Inventario de Taquería Chester</h3>
