@@ -6,6 +6,7 @@
   <title>Taquería Chester</title>
   <link rel="stylesheet" href="../ESTILOS/estilos.css">
   <link rel="stylesheet" href="../ESTILOS/estilo_inv.css">
+  <link rel="stylesheet" href="../ESTILOS/estilo_tablas_inv.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -107,10 +108,11 @@
           echo '<td>' . $row["descripcion"] . '</td>';
           echo '<td>' . $row["categoria"] . '</td>';
           echo '<td>' . $row["precio"] . '</td>';
-          // Nueva columna para acciones
+          
+          //ACTUALIZAR O ELIMINAR
           echo '<td>';
-          echo '<a href="modificar_producto.php?id=' . $row["id"] . '">Modificar</a> | ';
-          echo '<a href="eliminar_producto.php?id=' . $row["id"] . '">Eliminar</a>';
+          echo '<a href="../MODELO/modificar_producto.php?id=' . $row["id"] . '">Modificar</a> | ';
+          echo '<a href="../MODELO/eliminar_producto.php?id=' . $row["id"] . '">Eliminar</a>';
           echo '</td>';
           echo '</tr>';
       }
@@ -128,20 +130,13 @@ filas.forEach(function(fila) {
         // Obtén el valor de la celda ID de la fila clicada
         var idProducto = this.cells[0].textContent;
         // Redirige a la página de modificar con el ID del producto
-        window.location.href = 'modificar_producto.php?id=' + idProducto;
+        window.location.href = '../MODELO/modificar_producto.php?id=' + idProducto;
     });
 });
 </script>
 
   <footer>
     <p>&copy; 2024 Taquería Chester</p>
-    <ol>
-      <a href="../VISTA/ubicacion.html">Ubicación</a>
-      <br>
-      <a href="aviso.html">Aviso de privacidad</a>
-      <br>
-      <a href="terminos.html">Términos y Condiciones</a>
-    </ol>
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

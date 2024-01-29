@@ -19,13 +19,15 @@ if (isset($_GET["id"])) {
 
     if ($conn->query($sqlDeleteProducto) === TRUE) {
         $_SESSION["status"] = "success";
+        $_SESSION["message"] = "Producto eliminado correctamente.";
     } else {
         $_SESSION["status"] = "error";
+        $_SESSION["message"] = "Error al eliminar el producto.";
     }
 }
 
 $conn->close();
 
-header("Location: index.html");
+header("Location: ../VISTA/inventario.php");
 exit();
 ?>

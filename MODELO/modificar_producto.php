@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $conn->close();
-    header("Location: index.html");
+    header("Location: ../VISTA/inventario.php");
     exit();
 } elseif (isset($_GET["id"])) {
     $id = $_GET["id"];
@@ -58,15 +58,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Encabezado con metadatos y enlaces a estilos y scripts -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taquería Chester</title>
+  <link rel="stylesheet" href="../ESTILOS/estilos.css">
+  <link rel="stylesheet" href="../ESTILOS/estilo_inv.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
-  <!-- Formulario para modificar productos -->
-  <form action="../MODELO/modificar_producto.php" method="POST">
+  <header>
+    <img src="../imagenes/LOGO_TAQ_SINFONDO.png" alt="Logo de Taquería Chester" class="logo">
+    <h1>Taquería Chester</h1>
+    <p>¡En precio y calidad somos la mejor opción!</p>
+  </header>
+
+
+  <h3>Inventario de Taquería Chester</h3>
+  <h2>Modifica el producto de tu inventario</h2>
+
+ 
+<!-- Formulario para modificar productos -->
+<form action="../MODELO/modificar_producto.php" method="POST">
     <!-- Campos del formulario -->
     <input type="hidden" name="id" value="<?php echo $id; ?>">
     
@@ -96,17 +114,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit">Guardar Cambios</button>
   </form>
 
-  <!-- Mensajes de éxito o error -->
-  <?php
-  if (isset($_SESSION["status"])) {
-      if ($_SESSION["status"] == "success") {
-          echo '<p style="color: green;">Producto modificado correctamente.</p>';
-      } elseif ($_SESSION["status"] == "error") {
-          echo '<p style="color: red;">Error al modificar el producto.</p>';
-      }
-      unset($_SESSION["status"]);
-  }
-  ?>
+  
+
+
+
+  <footer>
+    <p>&copy; 2024 Taquería Chester</p>
+    <ol>
+      <a href="../VISTA/ubicacion.html">Ubicación</a>
+      <br>
+      <a href="aviso.html">Aviso de privacidad</a>
+      <br>
+      <a href="terminos.html">Términos y Condiciones</a>
+    </ol>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
