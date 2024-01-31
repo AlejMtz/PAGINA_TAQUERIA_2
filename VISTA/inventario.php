@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+
+if(isset($_SESSION["message"])) {
+    echo '<div class="mensaje">' . $_SESSION["message"] . '</div>';
+    unset($_SESSION["message"]);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +17,7 @@
   <link rel="stylesheet" href="../ESTILOS/estilos.css">
   <link rel="stylesheet" href="../ESTILOS/estilo_inv.css">
   <link rel="stylesheet" href="../ESTILOS/estilo_tablas_inv.css">
+  <link rel="stylesheet" href="../ESTILOS/estilos_mensajes_ex-err.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -68,7 +79,6 @@
   </tr>
 
   <?php
-  session_start(); // Inicia la sesión
 
   $servername = "localhost";
   $username = "root";

@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); // Inicia la sesión
 
 $servername = "localhost";
 $username = "root";
@@ -30,8 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sqlUpdateProducto) === TRUE) {
         $_SESSION["status"] = "success";
+        $_SESSION["message"] = "El producto '$nombreProducto' se ha modificado correctamente.";
     } else {
         $_SESSION["status"] = "error";
+        $_SESSION["message"] = "Error al modificar el producto. Inténtalo de nuevo.";
     }
 
     $conn->close();
@@ -59,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -67,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>Taquería Chester</title>
   <link rel="stylesheet" href="../ESTILOS/estilos.css">
   <link rel="stylesheet" href="../ESTILOS/estilo_inv.css">
+  <link rel="stylesheet" href="../ESTILOS/estilos_mensajes_ex-err.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>

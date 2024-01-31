@@ -26,19 +26,17 @@ $sqlInsertProducto = "INSERT INTO inventario (nombre, cantidad, descripcion, cat
 if ($conn->query($sqlInsertProducto) === TRUE) {
     // Establecer una variable de sesión para el mensaje de éxito
     $_SESSION["status"] = "success";
-
-    // Redirigir al formulario
-    header("Location: ../VISTA/inventario.php");
-    exit();
+    $_SESSION["message"] = "El producto '$nombreProducto' se ha guardado correctamente.";
 } else {
     // Establecer una variable de sesión para el mensaje de error
     $_SESSION["status"] = "error";
-
-    // Redirigir al formulario
-    header("Location: index.html");
-    exit();
+    $_SESSION["message"] = "Error al guardar el producto. Inténtalo de nuevo.";
 }
 
 // Cierra la conexión a la base de datos
 $conn->close();
+
+// Redirigir al formulario
+header("Location: ../VISTA/inventario.php");
+exit();
 ?>
