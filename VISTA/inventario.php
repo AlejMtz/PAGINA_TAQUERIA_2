@@ -54,19 +54,6 @@
     <button type="submit">Guardar Producto</button>
   </form>
 
-  <!-- Mensajes de éxito o error -->
-  <?php
-  // Verificar si hay un mensaje de éxito o error
-  if (isset($_SESSION["status"])) {
-      if ($_SESSION["status"] == "success") {
-          echo '<p style="color: green;">Producto guardado correctamente.</p>';
-      } elseif ($_SESSION["status"] == "error") {
-          echo '<p style="color: red;">Error al guardar el producto.</p>';
-      }
-      // Limpiar el mensaje después de mostrarlo
-      unset($_SESSION["status"]);
-  }
-  ?>
 
   <!-- Tabla para mostrar el inventario -->
   <table border="1">

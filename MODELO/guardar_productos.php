@@ -28,7 +28,7 @@ if ($conn->query($sqlInsertProducto) === TRUE) {
     $_SESSION["status"] = "success";
 
     // Redirigir al formulario
-    header("Location: index.html");
+    header("Location: ../VISTA/inventario.php");
     exit();
 } else {
     // Establecer una variable de sesión para el mensaje de error
