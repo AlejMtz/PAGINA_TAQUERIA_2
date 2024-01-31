@@ -1,13 +1,27 @@
-/* Agregamos estilos de presentación */
+
 .menu-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px;
   }
+.menu-button {
+    background-color: #4CAF50;
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+.menu-button:hover {
+    background-color: #45a049;
+  }
 
   section {
-    width: 30%; /* Ajusta el ancho según tus necesidades */
+    width: 30%; 
     margin-bottom: 20px;
     text-align: center;
   }
@@ -21,3 +35,4 @@
   section p {
     margin-top: 10px;
   }
+  
